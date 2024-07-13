@@ -1,4 +1,4 @@
-package com.tarefas.api;
+package com.tarefas.api.model;
 
 import java.time.LocalDate;
 
