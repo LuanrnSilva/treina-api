@@ -16,11 +16,11 @@ public class TarefaService {
     @Autowired
     private TarefaRepository tarefaRepository;
 
-    public Tarefa salvarTarefas(Tarefa tarefa){
+    public Tarefa salvarTarefa(Tarefa tarefa){
         return tarefaRepository.save(tarefa);
     }
 
-    public List<Tarefa> listarTarefas(){
+    public List<Tarefa> listarTarefa(){
         return tarefaRepository.findAll();
     }
 
