@@ -2,6 +2,8 @@ package com.tarefas.api.model;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.ManyToAny;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,5 +32,9 @@ public class Tarefa {
     @JsonFormat(pattern =  "dd/MM/yyyy")
     @Column(nullable = false)
     private LocalDate dataEntrada;
+
+    @ManyToAny
+    @JoinColumn (nullable = false, name = "usuario_id")
+    private Usuario responsavel;
     
 }
