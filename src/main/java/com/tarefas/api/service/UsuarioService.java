@@ -1,5 +1,6 @@
 package com.tarefas.api.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,18 @@ public class UsuarioService {
 
     public void deletarUsuario(Long id){
         usuarioRepository.deleteById(id);
+    }
+
+    public Optional<Usuario> buscarUsuarioPeloEmail(String email){
+        return usuarioRepository.findByEmail(email);
+    }
+
+    public List<Usuario> buscarUsuarioPeloNome(String nome){
+        return usuarioRepository.findByNomeLike(nome);
+    }
+
+    public List<Usuario> buscarUsuarioPelaDataNascimento(LocalDate dataInicio, LocalDate dataFim){
+        return usuarioRepository.findByDataNascimentoBetween(dataInicio, dataFim);
     }
 
 }

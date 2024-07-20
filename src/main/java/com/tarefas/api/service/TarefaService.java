@@ -1,6 +1,7 @@
 package com.tarefas.api.service;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +31,17 @@ public class TarefaService {
 
     public void deleteTarefa(Long id){
         tarefaRepository.deleteById(id);
+    }
+
+    public List<Tarefa> buscarTarefaPeloId(Long id){
+        return tarefaRepository.findByResponsavel_Id(id);
+    }
+
+    public List<Tarefa> buscarTarefaPeloTitulo(String titulo){
+        return tarefaRepository.findByTituloLike(titulo);
+    }
+
+    public List<Tarefa> buscarPelaDataEntrega(LocalDate dataInicio, LocalDate dataEntrega){
+        return tarefaRepository.findByDataEntregaBetween(dataInicio, dataEntrega);
     }
 }
