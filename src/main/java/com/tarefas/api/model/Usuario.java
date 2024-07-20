@@ -1,8 +1,10 @@
 package com.tarefas.api.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.tarefas.api.dto.UsuarioDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,4 +39,14 @@ public class Usuario {
     @Column(nullable = false)
     private LocalDate dataNascimento;
 
+    public UsuarioDTO converterUsuarioParaDto(){
+        UsuarioDTO dto = new UsuarioDTO();
+        
+        dto.setId(id);
+        dto.setNome(nome);
+        dto.setEmail(email);
+        dto.setIdade(Period.between(dataNascimento, LocalDate.now()).getYears());
+
+        return dto;
+    }
 }
