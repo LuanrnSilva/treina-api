@@ -1,5 +1,6 @@
 package com.tarefas.api.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tarefas.api.model.Tarefa;
@@ -47,6 +49,18 @@ public class TarefaController {
         return ResponseEntity.ok().body(tarefa.get());
     }
 
+    @GetMapping("/{titulo}")
+    public ResponseEntity<List<Tarefa>> buscarTarefaPeloTitulo(@PathVariable("titulo") String titulo){
+        return ResponseEntity.ok().body(tarefaService.buscarTarefaPeloTitulo(titulo));
+    }
+
+    @GetMapping("/data")
+    public ResponseEntity<List<Tarefa>> buscarTarefaPelaData(
+        @RequestParam("dataInicio") LocalDate dataInicio,
+        @RequestParam("dataEntrega") LocalDate dataEntrega){
+            return ResponseEntity.ok().body(tarefaService.buscarPelaDataEntrega(dataInicio, dataEntrega));
+        }
+        
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarTarefa(@PathVariable("id") Long id) {
         Optional<Tarefa> tarefa = tarefaService.buscarTarefa(id);
